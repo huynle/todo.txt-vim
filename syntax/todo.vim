@@ -42,8 +42,8 @@ syntax  match  TodoProject    '\(^\|\W\)+[^[:blank:]]\+'  contains=NONE
 syntax  match  TodoContext    '\(^\|\W\)@[^[:blank:]]\+'  contains=NONE
 
 highlight PriorityA cterm=bold gui=bold guifg=#ff5370
-highlight PriorityB cterm=bold gui=bold guifg=#ffcb6b
-highlight PriorityC guifg=#f78c6c
+highlight PriorityB cterm=bold gui=bold guifg=#f78c6c
+highlight PriorityC guifg=#ffcb6b
 highlight PriorityD guifg=#c3e88d
 
 " Other priority colours might be defined by the user

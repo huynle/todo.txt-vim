@@ -45,8 +45,8 @@ syntax  match  TodoContext    '\(^\|\W\)@[^[:blank:]]\+'  contains=NONE
 highlight  default  link  TodoDone       Comment
 highlight  default  link  TodoPriorityA  Debug
 highlight  default  link  TodoPriorityB  Constant
-highlight  default  link  TodoPriorityC  Conditional
-highlight  default  link  TodoPriorityD  @string
+highlight  default  link  TodoPriorityC  @string
+highlight  default  link  TodoPriorityD  Conditional
 highlight  default  link  TodoDate       PreProc
 highlight  default  link  TodoProject    Special
 highlight  default  link  TodoContext    Special

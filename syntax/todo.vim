@@ -41,11 +41,17 @@ syntax  match  TodoDate       '\d\{2,4\}-\d\{2\}-\d\{2\}' contains=NONE
 syntax  match  TodoProject    '\(^\|\W\)+[^[:blank:]]\+'  contains=NONE
 syntax  match  TodoContext    '\(^\|\W\)@[^[:blank:]]\+'  contains=NONE
 
+highlight PriorityA cterm=bold gui=bold guifg=#ff5370
+highlight PriorityB cterm=bold gui=bold guifg=#f78c6c
+highlight PriorityC guifg=#ffcb6b
+highlight PriorityD guifg=#c3e88d
+
 " Other priority colours might be defined by the user
 highlight  default  link  TodoDone       Comment
-highlight  default  link  TodoPriorityA  Constant
-highlight  default  link  TodoPriorityB  Statement
-highlight  default  link  TodoPriorityC  Identifier
+highlight  default  link  TodoPriorityA  PriorityA
+highlight  default  link  TodoPriorityB  PriorityB
+highlight  default  link  TodoPriorityC  PriorityC
+highlight  default  link  TodoPriorityD  PriorityD
 highlight  default  link  TodoDate       PreProc
 highlight  default  link  TodoProject    Special
 highlight  default  link  TodoContext    Special

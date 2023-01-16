@@ -24,10 +24,10 @@ nnoremap <script> <silent> <buffer> <localleader>s@ :%call todo#txt#sort_by_cont
 vnoremap <script> <silent> <buffer> <localleader>s@ :call todo#txt#sort_by_context()<CR>
 nnoremap <script> <silent> <buffer> <localleader>s+ :%call todo#txt#sort_by_project()<CR>
 vnoremap <script> <silent> <buffer> <localleader>s+ :call todo#txt#sort_by_project()<CR>
-nnoremap <script> <silent> <buffer> <localleader>sd :%call todo#txt#sort_by_date()<CR>
-vnoremap <script> <silent> <buffer> <localleader>sd :call todo#txt#sort_by_date()<CR>
-nnoremap <script> <silent> <buffer> <localleader>sdd :%call todo#txt#sort_by_due_date()<CR>
-vnoremap <script> <silent> <buffer> <localleader>sdd :call todo#txt#sort_by_due_date()<CR>
+nnoremap <script> <silent> <buffer> <localleader>sc :%call todo#txt#sort_by_date()<CR>
+vnoremap <script> <silent> <buffer> <localleader>sc :call todo#txt#sort_by_date()<CR>
+nnoremap <script> <silent> <buffer> <localleader>sd :%call todo#txt#sort_by_due_date()<CR>
+vnoremap <script> <silent> <buffer> <localleader>sd :call todo#txt#sort_by_due_date()<CR>
 
 " Change priority {{{2
 nnoremap <script> <silent> <buffer> J :call todo#txt#prioritize_increase()<CR>

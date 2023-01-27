@@ -58,7 +58,7 @@ vnoremap <script> <silent> <buffer> <localleader>x :call todo#txt#mark_as_done()
 nnoremap <script> <silent> <buffer> <localleader>X :call todo#txt#mark_all_as_done()<CR>
 
 " Remove completed {{{2
-nnoremap <script> <silent> <buffer> <localleader>D :call todo#txt#remove_completed()<CR>
+nnoremap <script> <silent> <buffer> <localleader>C :call todo#txt#remove_completed()<CR>
 
 " Folding {{{1
 " Options {{{2

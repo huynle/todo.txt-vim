@@ -5,6 +5,7 @@
 " Website:     http://github.com/freitass/todo.txt-vim
 " Version:     0.4
 
+
 " Save context {{{1
 let s:save_cpo = &cpo
 set cpo&vim
@@ -30,20 +31,25 @@ nnoremap <script> <silent> <buffer> <localleader>tsd :%call todo#txt#sort_by_due
 vnoremap <script> <silent> <buffer> <localleader>tsd :call todo#txt#sort_by_due_date()<CR>
 
 " Change priority {{{2
-nnoremap <script> <silent> <buffer> J :call todo#txt#prioritize_increase()<CR>
-vnoremap <script> <silent> <buffer> J :call todo#txt#prioritize_increase()<CR>
-nnoremap <script> <silent> <buffer> K :call todo#txt#prioritize_decrease()<CR>
-vnoremap <script> <silent> <buffer> K :call todo#txt#prioritize_decrease()<CR>
-" nnoremap <script> <silent> <buffer> <localleader>a :call todo#txt#prioritize_add('A')<CR>
-" vnoremap <script> <silent> <buffer> <localleader>a :call todo#txt#prioritize_add('A')<CR>
-" nnoremap <script> <silent> <buffer> <localleader>b :call todo#txt#prioritize_add('B')<CR>
-" vnoremap <script> <silent> <buffer> <localleader>b :call todo#txt#prioritize_add('B')<CR>
-" nnoremap <script> <silent> <buffer> <localleader>c :call todo#txt#prioritize_add('C')<CR>
-" vnoremap <script> <silent> <buffer> <localleader>c :call todo#txt#prioritize_add('C')<CR>
-" nnoremap <script> <silent> <buffer> <localleader>d :call todo#txt#prioritize_add('D')<CR>
-" vnoremap <script> <silent> <buffer> <localleader>d :call todo#txt#prioritize_add('D')<CR>
-" nnoremap <script> <silent> <buffer> <localleader>e :call todo#txt#prioritize_add('E')<CR>
-" vnoremap <script> <silent> <buffer> <localleader>e :call todo#txt#prioritize_add('E')<CR>
+nnoremap <script> <silent> <buffer> 0 :call todo#txt#TogglePriority()<CR>
+nnoremap <script> <silent> <buffer> + :call todo#txt#IncreasePriority()<CR>
+vnoremap <script> <silent> <buffer> + :call todo#txt#IncreasePriority()<CR>
+nnoremap <script> <silent> <buffer> _ :call todo#txt#DecreasePriority()<CR>
+vnoremap <script> <silent> <buffer> _ :call todo#txt#DecreasePriority()<CR>
+" nnoremap <script> <silent> <buffer> + :call todo#txt#prioritize_increase()<CR>
+" vnoremap <script> <silent> <buffer> + :call todo#txt#prioritize_increase()<CR>
+" nnoremap <script> <silent> <buffer> _ :call todo#txt#prioritize_decrease()<CR>
+" vnoremap <script> <silent> <buffer> _ :call todo#txt#prioritize_decrease()<CR>
+nnoremap <script> <silent> <buffer> <localleader>a :call todo#txt#prioritize_add('A')<CR>
+vnoremap <script> <silent> <buffer> <localleader>a :call todo#txt#prioritize_add('A')<CR>
+nnoremap <script> <silent> <buffer> <localleader>b :call todo#txt#prioritize_add('B')<CR>
+vnoremap <script> <silent> <buffer> <localleader>b :call todo#txt#prioritize_add('B')<CR>
+nnoremap <script> <silent> <buffer> <localleader>c :call todo#txt#prioritize_add('C')<CR>
+vnoremap <script> <silent> <buffer> <localleader>c :call todo#txt#prioritize_add('C')<CR>
+nnoremap <script> <silent> <buffer> <localleader>d :call todo#txt#prioritize_add('D')<CR>
+vnoremap <script> <silent> <buffer> <localleader>d :call todo#txt#prioritize_add('D')<CR>
+nnoremap <script> <silent> <buffer> <localleader>e :call todo#txt#prioritize_add('E')<CR>
+vnoremap <script> <silent> <buffer> <localleader>e :call todo#txt#prioritize_add('E')<CR>
 
 " Insert date {{{2
 inoremap <script> <silent> <buffer> date<Tab> <C-R>=strftime("%Y-%m-%d")<CR>
@@ -87,6 +93,7 @@ function! s:todo_fold_text()
                 \ . (v:foldend - v:foldstart + 1)
                 \ . ' Completed tasks '
 endfunction
+
 
 " Restore context {{{1
 let &cpo = s:save_cpo

@@ -192,11 +192,12 @@ function todo#txt#TodoCheckoff()
 
 endfunction
 
-
 function todo#txt#IncreasePriority()
-  " if !todo#txt#HasCheckbox() || expand("%:p:t") != "todo.txt"
-  "   return
-  " end
+  if &filetype != "todo"
+    if !todo#txt#HasCheckbox()
+      return
+    end
+  end
 
   if todo#txt#HasPriority()
     " execute('normal todo#txt#mz0t)'."\<c-A>`z")
@@ -228,9 +229,12 @@ function todo#txt#SetDuedate(val)
 endfunction
 
 function todo#txt#DecreasePriority()
-  " if !todo#txt#HasCheckbox() || expand("%:p:t") != "todo.txt"
-  "   return
-  " end
+
+  if &filetype != "todo"
+    if !todo#txt#HasCheckbox()
+      return
+    end
+  end
 
   if matchstr(getline('.'), '(A)') == "(A)"
     call todo#txt#TogglePriority()

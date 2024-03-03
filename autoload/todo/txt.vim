@@ -127,5 +127,125 @@ function! todo#txt#prioritize_add_action(priority)
     execute 's/^\(([a-zA-Z]) \)\?/(' . a:priority . ') /'
 endfunction
 
+
+function todo#txt#HasCheckbox()
+  let l:current_line = getline(".")
+  let l:match = match(l:current_line, '\[.\]:')
+  if l:match != -1
+    return v:true
+  endif
+  return v:false
+endfunction
+
+function todo#txt#HasPriority()
+  let l:current_line = getline(".")
+  let l:match = match(l:current_line, '(.) ')
+  if l:match >= 0
+    return v:true
+  endif
+  return v:false
+endfunction
+
+function todo#txt#HasDuedate()
+  let l:current_line = getline(".")
+  let l:match = match(l:current_line, 'due:')
+  if l:match >= 0
+    return v:true
+  endif
+  return v:false
+endfunction
+
+function todo#txt#TogglePriority()
+  let l:current_line = getline(".")
+  if todo#txt#HasPriority()
+    call setline('.', substitute(l:current_line, '\v(\(.\)) ', '', ''))
+  elseif todo#txt#HasCheckbox() && !todo#txt#HasPriority()
+    call setline('.', substitute(l:current_line, '\v(\[.\]: )', '\1(A) ', ''))
+  elseif !todo#txt#HasCheckbox() && !todo#txt#HasPriority()
+    call setline('.', substitute(l:current_line, '\v(\w)', '(A) \1', ''))
+  endif
+endfunction
+
+function todo#txt#ToggleCheckbox()
+  let l:current_line = getline(".")
+  if todo#txt#HasCheckbox()
+    call setline('.', substitute(l:current_line, '\[.\]: ', '', ''))
+  else 
+    execute 's/\v([-+#] )+(\(.\) )?\s?/\1[ ]: \2'.strftime('%Y-%m-%d').' /'
+  endif
+endfunction
+
+function todo#txt#TodoCheckoff()
+  if !todo#txt#HasCheckbox()
+    return
+  endif
+
+  let l:current_line = getline(".")
+  let l:unchecked = match(l:current_line, '\v\[ \]:')
+
+  if l:unchecked
+    echom "unchecked"
+    call setline('.', substitute(l:current_line, '\v\[ \]: (\(.\))?\s?', '[x]: '.strftime('%Y-%m-%d').' ', ''))
+  else 
+    call setline('.', substitute(l:current_line, '\[.\]:', '[ ]:', ''))
+  endif
+
+endfunction
+
+function todo#txt#IncreasePriority()
+  if &filetype != "todo"
+    if !todo#txt#HasCheckbox()
+      return
+    end
+  end
+
+  if todo#txt#HasPriority()
+    " execute('normal todo#txt#mz0t)'."\<c-A>`z")
+    normal! 0f)h
+  else
+    call todo#txt#TogglePriority()
+  endif
+endfunction
+
+function todo#txt#SetPriority(val)
+  if !todo#txt#HasPriority()
+    call todo#txt#TogglePriority()
+  endif
+  execute('normal todo#txt#mz0t)r'.a:val."`z")
+endfunction
+
+
+function todo#txt#SetDuedate(val)
+  let l:current_line = getline(".")
+  execute('normal todo#txt#mz')
+  if !todo#txt#HasDuedate()
+    " call setline('.', substitute(l:crrent_line, '\v$', ' due:'.s:get_current_date().' ', ''))
+    execute 's/$/ due:'.a:val.'/'
+  else
+    " execute 's/due:\d\{2,4\}-\d\{2\}-\d\{2\}/due:'.a:val.'/'
+    execute 's/due:\d\{2,4\}-\d\{2\}-\d\{2\}/due:'.a:val.'/'
+  endif
+  execute('normal todo#txt#`z')
+endfunction
+
+function todo#txt#DecreasePriority()
+
+  if &filetype != "todo"
+    if !todo#txt#HasCheckbox()
+      return
+    end
+  end
+
+  if matchstr(getline('.'), '(A)') == "(A)"
+    call todo#txt#TogglePriority()
+  elseif todo#txt#HasPriority()
+    " execute('normal todo#txt#mz0t)'."\<c-X>`z")
+    normal! 0f)h
+  else
+    call todo#txt#TogglePriority()
+  endif
+endfunction
+
+
 " Modeline {{{1
 " vim: ts=8 sw=4 sts=4 et foldenable foldmethod=marker foldcolumn=1

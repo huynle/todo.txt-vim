@@ -171,7 +171,7 @@ function todo#txt#ToggleCheckbox()
   if todo#txt#HasCheckbox()
     call setline('.', substitute(l:current_line, '\[.\] ', '', ''))
   else 
-    execute 's/\v([-+#] )+(\(.\) )?\s?/\1[ ] \2'.strftime('%Y-%m-%d').' /'
+    execute 's/\v([-+#*] )+(\(.\) )?\s?/\1[ ] \2'.strftime('%Y-%m-%d').' /'
   endif
 endfunction
 

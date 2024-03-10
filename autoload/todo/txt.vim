@@ -130,7 +130,7 @@ endfunction
 
 function todo#txt#HasCheckbox()
   let l:current_line = getline(".")
-  let l:match = match(l:current_line, '\[.\]:')
+  let l:match = match(l:current_line, '\[.\]')
   if l:match != -1
     return v:true
   endif
@@ -160,7 +160,7 @@ function todo#txt#TogglePriority()
   if todo#txt#HasPriority()
     call setline('.', substitute(l:current_line, '\v(\(.\)) ', '', ''))
   elseif todo#txt#HasCheckbox() && !todo#txt#HasPriority()
-    call setline('.', substitute(l:current_line, '\v(\[.\]: )', '\1(A) ', ''))
+    call setline('.', substitute(l:current_line, '\v(\[.\] )', '\1(A) ', ''))
   elseif !todo#txt#HasCheckbox() && !todo#txt#HasPriority()
     call setline('.', substitute(l:current_line, '\v(\w)', '(A) \1', ''))
   endif
@@ -169,11 +169,12 @@ endfunction
 function todo#txt#ToggleCheckbox()
   let l:current_line = getline(".")
   if todo#txt#HasCheckbox()
-    call setline('.', substitute(l:current_line, '\[.\]: ', '', ''))
+    call setline('.', substitute(l:current_line, '\[.\] ', '', ''))
   else 
-    execute 's/\v([-+#] )+(\(.\) )?\s?/\1[ ]: \2'.strftime('%Y-%m-%d').' /'
+    execute 's/\v([-+#] )+(\(.\) )?\s?/\1[ ] \2'.strftime('%Y-%m-%d').' /'
   endif
 endfunction
+
 
 function todo#txt#TodoCheckoff()
   if !todo#txt#HasCheckbox()
@@ -181,13 +182,13 @@ function todo#txt#TodoCheckoff()
   endif
 
   let l:current_line = getline(".")
-  let l:unchecked = match(l:current_line, '\v\[ \]:')
+  let l:unchecked = match(l:current_line, '\v\[ \]')
 
   if l:unchecked
     echom "unchecked"
-    call setline('.', substitute(l:current_line, '\v\[ \]: (\(.\))?\s?', '[x]: '.strftime('%Y-%m-%d').' ', ''))
+    call setline('.', substitute(l:current_line, '\v\[ \] (\(.\))?\s?', '[x] '.strftime('%Y-%m-%d').' ', ''))
   else 
-    call setline('.', substitute(l:current_line, '\[.\]:', '[ ]:', ''))
+    call setline('.', substitute(l:current_line, '\[.\]', '[ ]', ''))
   endif
 
 endfunction

@@ -31,7 +31,7 @@ nnoremap <script> <silent> <buffer> <localleader>sd :%call todo#txt#sort_by_due_
 vnoremap <script> <silent> <buffer> <localleader>sd :call todo#txt#sort_by_due_date()<CR>
 
 " Change priority {{{2
-nnoremap <script> <silent> <buffer> 0 :call todo#txt#TogglePriority()<CR>
+" nnoremap <script> <silent> <buffer> 0 :call todo#txt#TogglePriority()<CR>
 nnoremap <script> <silent> <buffer> + :call todo#txt#IncreasePriority()<CR>
 vnoremap <script> <silent> <buffer> + :call todo#txt#IncreasePriority()<CR>
 nnoremap <script> <silent> <buffer> _ :call todo#txt#DecreasePriority()<CR>

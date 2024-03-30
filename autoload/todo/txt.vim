@@ -195,7 +195,8 @@ endfunction
 
 function todo#txt#IncreasePriority()
   if &filetype != "todo"
-    if !todo#txt#HasCheckbox()
+    if !todo#txt#HasCheckbox() && !todo#txt#HasPriority()
+      normal! 
       return
     end
   end
@@ -232,7 +233,8 @@ endfunction
 function todo#txt#DecreasePriority()
 
   if &filetype != "todo"
-    if !todo#txt#HasCheckbox()
+    if !todo#txt#HasCheckbox() && !todo#txt#HasPriority()
+      normal! 
       return
     end
   end
